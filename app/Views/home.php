@@ -1,50 +1,130 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-<section>
-    <div class="container" style="margin-top: 80px;">
-        <?php if (session()->getFlashdata('pesan')) : ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <?= session()->getFlashdata('pesan'); ?>
-                <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button> -->
-            </div>
-        <?php endif; ?>
-        <div class="row justify-content-center">
-            <div class="col-sm-6 col-lg-4 mb-4">
-                <div class="card" style="width: 18rem; ">
-                    <img src="<?= base_url() ?>assets/images/gambar1.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">NCR Form</h5>
-                        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                        <a href="<?= base_url('/ncr_form') ?>" class="btn btn-primary">Pilih</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4 mb-4">
-                <div class="card" style="width: 18rem; ">
-                    <img src="<?= base_url() ?>assets/images/Petroleum.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Detail Laporan</h5>
-                        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                        <a href="<?= base_url('/detail_ncr') ?>" class="btn btn-primary">Pilih</a>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="col-sm-6 col-lg-4 mb-4">
-            <div class="card" style="width: 18rem;">
-                <img src="<?= base_url() ?>assets/images/gambar2.jpeg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">NCR Products</h5>
-                    <a href="<?= base_url('/form_product') ?>" class="btn btn-primary">Pilih</a>
-                </div>
-            </div>
-        </div> -->
+<!-- ======================= Cards ================== -->
+<div class="cardBox">
+    <div class="mycard">
+        <div>
+            <div class="numbers">1,504</div>
+            <div class="cardName">Daily Views</div>
         </div>
-        <div class="d-flex justify-content-center w-100">
-            <a href="<?= base_url('/logout') ?>" class="btn btn-lg btn-danger">Logout</a>
+
+        <div class="iconBx">
+            <ion-icon name="eye-outline"></ion-icon>
         </div>
     </div>
-</section>
+
+    <div class="mycard">
+        <div>
+            <div class="numbers">80</div>
+            <div class="cardName">Sales</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="cart-outline"></ion-icon>
+        </div>
+    </div>
+
+    <div class="mycard">
+        <div>
+            <div class="numbers">284</div>
+            <div class="cardName">Comments</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="chatbubbles-outline"></ion-icon>
+        </div>
+    </div>
+
+    <div class="mycard">
+        <div>
+            <div class="numbers">$7,842</div>
+            <div class="cardName">Earning</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="cash-outline"></ion-icon>
+        </div>
+    </div>
+</div>
+
+<!-- ================ Order Details List ================= -->
+<div class="details">
+    <div class="recentOrders">
+        <div class="cardHeader">
+            <h2>Recent Orders</h2>
+            <a href="#" class="btn">View All</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Price</td>
+                    <td>Payment</td>
+                    <td>Status</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Star Refrigerator</td>
+                    <td>$1200</td>
+                    <td>Paid</td>
+                    <td><span class="status delivered">Delivered</span></td>
+                </tr>
+
+                <tr>
+                    <td>Dell Laptop</td>
+                    <td>$110</td>
+                    <td>Due</td>
+                    <td><span class="status pending">Pending</span></td>
+                </tr>
+
+                <tr>
+                    <td>Apple Watch</td>
+                    <td>$1200</td>
+                    <td>Paid</td>
+                    <td><span class="status return">Return</span></td>
+                </tr>
+
+                <tr>
+                    <td>Addidas Shoes</td>
+                    <td>$620</td>
+                    <td>Due</td>
+                    <td><span class="status inProgress">In Progress</span></td>
+                </tr>
+
+                <tr>
+                    <td>Star Refrigerator</td>
+                    <td>$1200</td>
+                    <td>Paid</td>
+                    <td><span class="status delivered">Delivered</span></td>
+                </tr>
+
+                <tr>
+                    <td>Dell Laptop</td>
+                    <td>$110</td>
+                    <td>Due</td>
+                    <td><span class="status pending">Pending</span></td>
+                </tr>
+
+                <tr>
+                    <td>Apple Watch</td>
+                    <td>$1200</td>
+                    <td>Paid</td>
+                    <td><span class="status return">Return</span></td>
+                </tr>
+
+                <tr>
+                    <td>Addidas Shoes</td>
+                    <td>$620</td>
+                    <td>Due</td>
+                    <td><span class="status inProgress">In Progress</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <?= $this->endSection() ?>

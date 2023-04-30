@@ -1,11 +1,5 @@
 <?= $this->extend('layout/template') ?>
-<!-- body {
-background-image: url("assets/images/1.jpg");
-background-size: cover;
-background-position: center;
-background-attachment: fixed;
-background-repeat: no-repeat;
-} -->
+
 <?= $this->section('content') ?>
 <div class="container-fluid" style="background-image: url('assets/images/1.jpg'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;">
     <section class="vh-100">
