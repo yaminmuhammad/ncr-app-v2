@@ -11,11 +11,13 @@
     <!-- My CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- DATATABLE -->
+    <link href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.4/af-2.5.3/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/fc-4.2.2/fh-3.3.2/r-2.4.1/sb-1.4.2/sp-2.1.2/datatables.min.css" rel="stylesheet" />
 
 </head>
 
@@ -48,7 +50,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="<?= base_url('/logout') ?> " onclick="return confirm('Apakah Anda yakin ingin logout?')">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -101,6 +103,10 @@
             $('#process-table').DataTable();
         });
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.4/af-2.5.3/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/fc-4.2.2/fh-3.3.2/r-2.4.1/sb-1.4.2/sp-2.1.2/datatables.min.js"></script>
 </body>
 
 </html>

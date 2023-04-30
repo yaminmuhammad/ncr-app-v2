@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="mycard">
+    <!-- <div class="mycard">
         <div>
             <div class="numbers">$7,842</div>
             <div class="cardName">Earning</div>
@@ -45,18 +45,18 @@
         <div class="iconBx">
             <ion-icon name="cash-outline"></ion-icon>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- ================ Order Details List ================= -->
 <div class="details">
     <div class="recentOrders">
         <div class="cardHeader">
-            <h2>Recent Orders</h2>
-            <a href="#" class="btn">View All</a>
+            <h2>Recent Reports</h2>
+            <!-- <a href="#" class="btn">View All</a> -->
         </div>
 
-        <table>
+        <table id="process-table">
             <thead>
                 <tr>
                     <td>Name</td>
