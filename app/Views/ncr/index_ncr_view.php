@@ -26,7 +26,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <?php $i = 1; ?>
+                        <?php dd($ncr) ?>
                         <?php foreach ($ncr as $n) : ?>
                             <tr>
                                 <th scope="row"><?= $i++; ?></th>

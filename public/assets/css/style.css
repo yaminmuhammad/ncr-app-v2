@@ -116,11 +116,13 @@ input[type="number"] {
 }
 
 :root {
-  --blue: #2a2185;
+  --blued: #2a2185;
   --white: #fff;
   --gray: #f5f5f5;
   --black1: #222;
   --black2: #999;
+  --red1: #dc3545;
+  --yellow1: #ffc107;
 }
 
 body {
@@ -138,8 +140,8 @@ body {
   position: fixed;
   width: 300px;
   height: 100%;
-  background: var(--blue);
-  border-left: 10px solid var(--blue);
+  background: var(--blued);
+  border-left: 10px solid var(--blued);
   transition: 0.5s;
   overflow: hidden;
 }
@@ -182,7 +184,7 @@ body {
 }
 .mynavigation ul li:hover a,
 .mynavigation ul li.hovered a {
-  color: var(--blue);
+  color: var(--blued);
 }
 
 .mynavigation ul li a .icon {
@@ -281,7 +283,7 @@ body {
 
 .cardBox .mycard {
   position: relative;
-  background: var(--white);
+  background: var(--blued);
   padding: 30px;
   border-radius: 20px;
   display: flex;
@@ -294,22 +296,22 @@ body {
   position: relative;
   font-weight: 500;
   font-size: 2.5rem;
-  color: var(--blue);
+  color: var(--white);
 }
 
 .cardBox .mycard .cardName {
-  color: var(--black2);
+  color: var(--white);
   font-size: 1.1rem;
   margin-top: 5px;
 }
 
 .cardBox .mycard .iconBx {
   font-size: 3.5rem;
-  color: var(--black2);
+  color: var(--white);
 }
 
 .cardBox .mycard:hover {
-  background: var(--blue);
+  background: var(--blued);
 }
 .cardBox .mycard:hover .numbers,
 .cardBox .mycard:hover .cardName,
@@ -320,7 +322,7 @@ body {
 /* ================== Order Details List ============== */
 .details {
   position: relative;
-  width: 100%;
+  width: 100vw;
   padding: 20px;
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -331,7 +333,6 @@ body {
 .details .recentOrders {
   position: relative;
   display: grid;
-  min-height: 500px;
   background: var(--white);
   padding: 20px;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
@@ -345,12 +346,12 @@ body {
 }
 .cardHeader h2 {
   font-weight: 600;
-  color: var(--blue);
+  color: var(--blued);
 }
 .cardHeader .btn {
   position: relative;
   padding: 5px 10px;
-  background: var(--blue);
+  background: var(--blued);
   text-decoration: none;
   color: var(--white);
   border-radius: 6px;
@@ -372,7 +373,7 @@ body {
   border-bottom: none;
 }
 .details .recentOrders table tbody tr:hover {
-  background: var(--blue);
+  background: var(--blued);
   color: var(--white);
 }
 .details .recentOrders table tr td {

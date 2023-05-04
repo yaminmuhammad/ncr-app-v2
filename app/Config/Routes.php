@@ -36,7 +36,7 @@ $routes->get('/login', 'Login::index');
 $routes->post('/login/auth', 'Login::auth');
 $routes->get('/logout', 'Login::logout');
 
-$routes->get('/home', 'Home::index', ['filter' => 'auth']);
+// $routes->get('/home', 'Home::index', ['filter' => 'auth']);
 $routes->get('/form_product', 'Product::create_product', ['filter' => 'auth']);
 $routes->post('/product/save', 'Product::save', ['filter' => 'auth']);
 $routes->get('/ncr_form', 'Ncr::create_ncr', ['filter' => 'auth']);
@@ -44,7 +44,7 @@ $routes->get('/form_process', 'Process::create_process', ['filter' => 'auth']);
 $routes->post('/process/save', 'Process::save', ['filter' => 'auth']);
 $routes->post('/ncr/save', 'Ncr::save', ['filter' => 'auth']);
 
-$routes->get('/detail_ncr', 'Ncr::index_ncr', ['filter' => 'auth']);
+$routes->get('/home', 'Ncr::index_ncr', ['filter' => 'auth']);
 
 $routes->get('/detail_process', 'Process::index_process', ['filter' => 'auth']);
 $routes->get('/detail_process/export', 'Process::export', ['filter' => 'auth']);

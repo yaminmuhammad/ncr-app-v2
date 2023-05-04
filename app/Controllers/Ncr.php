@@ -105,10 +105,12 @@ class Ncr extends BaseController
     public function index_ncr()
     {
         $ncr = $this->ncrModel->findAll();
+        $total_rows = $this->ncrModel->countRows();
         $data = [
             'title' => 'Daftar Laporan NCR',
-            'ncr' => $ncr
+            'ncr' => $ncr,
+            'total_rows' => $total_rows
         ];
-        return view('ncr/index_ncr_view', $data);
+        return view('home', $data);
     }
 }

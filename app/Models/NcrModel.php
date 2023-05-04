@@ -16,4 +16,9 @@ class NcrModel extends Model
     //         'id' => $id
     //     ])->first();
     // }
+
+    public function countRows()
+    {
+        return $this->countAllResults();
+    }
 }

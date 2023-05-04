@@ -52,9 +52,18 @@ class Login extends BaseController
                 'npk' => $cek['npk'],
                 'is_login' => true
             ];
+            if ($cek['roles'] == 'ADMIN') {
+                $session_data['is_admin'] = true;
+            } else {
+                $session_data['is_admin'] = false;
+            }
             $this->session->set($session_data);
             $this->session->setFlashdata('pesan', 'Login Berhasil');
-            return redirect()->to(base_url('home'));
+            if (session()->get('is_admin')) {
+                return redirect()->to(base_url('home'));
+            } else {
+                return redirect()->to(base_url('ncr_form'));
+            }
         } else {
             $this->session->setFlashdata('pesan', 'Nama atau NPK salah');
             return redirect()->to(base_url('login'));

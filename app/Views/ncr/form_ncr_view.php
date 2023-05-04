@@ -1,7 +1,7 @@
 <?= $this->extend('layout/template') ?>
 
 <?= $this->section('content') ?>
-<section style="background-image: url('assets/images/1.jpg'); background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat;">
+<section>
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-8 col-xl-6">
@@ -13,9 +13,9 @@
                         <?php if (session()->getFlashdata('pesan')) : ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <?= session()->getFlashdata('pesan'); ?>
-                                <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
-                                </button> -->
+                                </button>
                             </div>
                         <?php endif; ?>
                         <!-- end flash data -->
@@ -23,27 +23,27 @@
                             <?= csrf_field() ?>
                             <div class="form-group mb-4">
                                 <label for="problem" class="form-label fs-5">Problem</label>
-                                <textarea class="form-control border border-2 p-2 mb-2 <?= (validation_show_error('problem')) ? 'is-invalid' : ''; ?>" id="problem" autofocus value="<?= old('problem') ?>" name="problem" style="height: 100px; resize: none;"></textarea>
+                                <textarea class="form-control border border-2 p-2 mb-2 <?= (validation_show_error('problem')) ? 'is-invalid' : ''; ?>" id="problem" placeholder="Masukkan Detail Problem" autofocus value="<?= old('problem') ?>" name="problem" style="height: 100px; resize: none;"></textarea>
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('problem'); ?>
                                 </div>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="area" class="form-label fs-5">Area</label>
-                                <input type="text" class="form-control border border-2 p-2 mb-2 <?= (validation_show_error('area')) ? 'is-invalid' : ''; ?>" id="area" name="area" value="<?= old('area') ?>" />
+                                <input type="text" class="form-control border border-2 p-2 mb-2 <?= (validation_show_error('area')) ? 'is-invalid' : ''; ?>" id="area" placeholder="ex : GEDUNG A" name="area" value="<?= old('area') ?>" />
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('area'); ?>
                                 </div>
                             </div>
                             <div class="form-group mb-4 row justify-content-center">
-                                <div class="col-8">
+                                <div class="col-5">
                                     <label for="qty" class="form-label fs-5">Quantity</label>
-                                    <input type="number" class="form-control border border-2 p-2 mb-2 <?= (validation_show_error('qty')) ? 'is-invalid' : ''; ?>" id="qty" name="qty" value="<?= old('qty') ?>" />
+                                    <input type="number" class="form-control border border-2 p-2 mb-2 <?= (validation_show_error('qty')) ? 'is-invalid' : ''; ?>" id="qty" placeholder="ex : 10" name="qty" value="<?= old('qty') ?>" />
                                     <div class="invalid-feedback">
                                         <?= validation_show_error('qty'); ?>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-7">
                                     <label for="satuan" class="form-label fs-5">Satuan</label>
                                     <select class="form-control  border border-2 p-2 mb-2 select2 satuan <?= (validation_show_error('satuan')) ? 'is-invalid' : ''; ?>" data-placeholder="-- Pilih Satuan --" data-allow-clear="true" name="satuan" id="satuan">
                                         <option disabled selected>-- Pilih Satuan --</option>
@@ -98,17 +98,17 @@
                                 </div>
                             </div>
                             <div class="form-group mb-4">
-                                <label for="foto" class="form-label fs-5 custom-file-label <?= (validation_show_error('foto')) ? 'is-invalid' : ''; ?>">Upload Foto</label>
+                                <label for="foto" class="form-label fs-5 custom-file-label-poto <?= (validation_show_error('foto')) ? 'is-invalid' : ''; ?>">Upload Foto</label>
                                 <div class="col-sm-8 w-200 h-150">
                                     <img src="/assets/images/default.jpg" class="img-thumbnail img-preview">
                                 </div>
-                                <input type="file" class="form-control border border-2 p-2 mb-2 " id="foto" onchange="previewImg()" name="foto" />
+                                <input type="file" class="form-control border border-2 mb-5 " id="foto" onchange="previewImg()" name="foto" />
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('foto'); ?>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <a href="<?= base_url('/home'); ?>" class="btn btn-secondary btn-lg">Back</a>
+                                <a href="<?= base_url('/ncr_form') ?>" class="btn btn-secondary btn-lg">Back</a>
                                 <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                             </div>
                         </form>

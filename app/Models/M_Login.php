@@ -8,7 +8,7 @@ class M_Login extends Model
 {
 
     protected $table            = 'users';
-    protected $allowedFields    = ['nomor', 'npk', 'nama', 'status', 'divisi', 'departemen', 'seksi', 'bagian'];
+    protected $allowedFields    = ['nomor', 'npk', 'nama', 'status', 'divisi', 'departemen', 'seksi', 'bagian', 'roles'];
 
     // Dates
     protected $useTimestamps = true;
