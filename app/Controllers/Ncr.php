@@ -96,7 +96,8 @@ class Ncr extends BaseController
             'satuan' => $this->request->getVar('satuan'),
             'departemen_tujuan' => $this->request->getVar('departemen_tujuan'),
             'jenis' => $this->request->getVar('jenis'),
-            'foto' => $namaFoto
+            'foto' => $namaFoto,
+            'status' => "PENDING"
         ]);
         session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan');
         return redirect()->to('/ncr_form');
@@ -112,5 +113,18 @@ class Ncr extends BaseController
             'total_rows' => $total_rows
         ];
         return view('home', $data);
+    }
+
+    public function detail_ncr($id)
+    {
+
+        $data = [
+            'title' => 'Detail Laporan NCR',
+            'id_ncr' =>  $this->ncrModel->getNcr($id)
+        ];
+        if (empty($data['id_ncr'])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('id NCR tidak ditemukan');
+        }
+        return view('ncr/detail_ncr_view', $data);
     }
 }

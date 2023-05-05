@@ -4,8 +4,8 @@
 <section>
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-8 col-xl-6">
-                <div class="card rounded-3">
+            <div class="">
+                <div class="card rounded-3 border shadow">
                     <!-- <img src="assets/images/gambar1.jpeg" class="w-90" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo"> -->
                     <div class="card-body p-4 p-md-5">
                         <h2 class="text-center mb-4">Form Report NCR </h2>
@@ -23,14 +23,14 @@
                             <?= csrf_field() ?>
                             <div class="form-group mb-4">
                                 <label for="problem" class="form-label fs-5">Problem</label>
-                                <textarea class="form-control border border-2 p-2 mb-2 <?= (validation_show_error('problem')) ? 'is-invalid' : ''; ?>" id="problem" placeholder="Masukkan Detail Problem" autofocus value="<?= old('problem') ?>" name="problem" style="height: 100px; resize: none;"></textarea>
+                                <textarea class="form-control border p-2 mb-2 <?= (validation_show_error('problem')) ? 'is-invalid' : ''; ?>" id="problem" placeholder="Masukkan Detail Problem" autofocus value="<?= old('problem') ?>" name="problem" style="height: 100px; resize: none;"></textarea>
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('problem'); ?>
                                 </div>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="area" class="form-label fs-5">Area</label>
-                                <input type="text" class="form-control border border-2 p-2 mb-2 <?= (validation_show_error('area')) ? 'is-invalid' : ''; ?>" id="area" placeholder="ex : GEDUNG A" name="area" value="<?= old('area') ?>" />
+                                <input type="text" class="form-control border p-2 mb-2 <?= (validation_show_error('area')) ? 'is-invalid' : ''; ?>" id="area" placeholder="cth : GEDUNG A" name="area" value="<?= old('area') ?>" />
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('area'); ?>
                                 </div>
@@ -38,14 +38,14 @@
                             <div class="form-group mb-4 row justify-content-center">
                                 <div class="col-5">
                                     <label for="qty" class="form-label fs-5">Quantity</label>
-                                    <input type="number" class="form-control border border-2 p-2 mb-2 <?= (validation_show_error('qty')) ? 'is-invalid' : ''; ?>" id="qty" placeholder="ex : 10" name="qty" value="<?= old('qty') ?>" />
+                                    <input type="number" class="form-control border p-2 mb-2 <?= (validation_show_error('qty')) ? 'is-invalid' : ''; ?>" id="qty" placeholder="cth : 10" name="qty" value="<?= old('qty') ?>" />
                                     <div class="invalid-feedback">
                                         <?= validation_show_error('qty'); ?>
                                     </div>
                                 </div>
                                 <div class="col-7">
                                     <label for="satuan" class="form-label fs-5">Satuan</label>
-                                    <select class="form-control  border border-2 p-2 mb-2 select2 satuan <?= (validation_show_error('satuan')) ? 'is-invalid' : ''; ?>" data-placeholder="-- Pilih Satuan --" data-allow-clear="true" name="satuan" id="satuan">
+                                    <select class="form-control  border p-2 mb-2 select2 satuan <?= (validation_show_error('satuan')) ? 'is-invalid' : ''; ?>" data-placeholder="-- Pilih Satuan --" data-allow-clear="true" name="satuan" id="satuan">
                                         <option disabled selected>-- Pilih Satuan --</option>
                                         <option value="Pallet">Pallet</option>
                                         <option value="Rak">Rak</option>
@@ -62,7 +62,7 @@
                             </div> -->
                             <div class="form-group mb-4">
                                 <label for="departemen_tujuan" class="form-label fs-5">Departemen Tujuan</label>
-                                <select class="form-control select2  border border-2 p-2 mb-2 departemen_tujuan <?= (validation_show_error('departemen_tujuan')) ? 'is-invalid' : ''; ?>" data-placeholder="-- Pilih Departemen Tujuan --" data-allow-clear="true" name="departemen_tujuan" id="departemen_tujuan">
+                                <select class="form-control select2  border p-2 mb-2 departemen_tujuan <?= (validation_show_error('departemen_tujuan')) ? 'is-invalid' : ''; ?>" data-placeholder="-- Pilih Departemen Tujuan --" data-allow-clear="true" name="departemen_tujuan" id="departemen_tujuan">
                                     <option disabled selected>-- Pilih Departemen Tujuan --</option>
                                     <option value="GA, IR & CSR">GA, IR & CSR</option>
                                     <option value="PRODUCTION 1">PRODUCTION 1</option>
@@ -88,7 +88,7 @@
                             </div>
                             <div class="form-group mb-4">
                                 <label for="jenis" class="form-label fs-5">Jenis Laporan NCR</label>
-                                <select class="form-control select2  border border-2 p-2 mb-2 jenis <?= (validation_show_error('jenis')) ? 'is-invalid' : ''; ?>" data-placeholder="-- Pilih Jenis --" data-allow-clear="true" name="jenis" id="jenis">
+                                <select class="form-control select2  border p-2 mb-2 jenis <?= (validation_show_error('jenis')) ? 'is-invalid' : ''; ?>" data-placeholder="-- Pilih Jenis --" data-allow-clear="true" name="jenis" id="jenis">
                                     <option disabled selected>-- Pilih Jenis --</option>
                                     <option value="NCR PROCESS">NCR PROCESS</option>
                                     <option value="NCR PRODUCT">NCR PRODUCT</option>
@@ -99,18 +99,17 @@
                             </div>
                             <div class="form-group mb-4">
                                 <label for="foto" class="form-label fs-5 custom-file-label-poto <?= (validation_show_error('foto')) ? 'is-invalid' : ''; ?>">Upload Foto</label>
-                                <div class="col-sm-8 w-200 h-150">
+                                <div class="col-sm-3 mb-4">
                                     <img src="/assets/images/default.jpg" class="img-thumbnail img-preview">
                                 </div>
-                                <input type="file" class="form-control border border-2 mb-5 " id="foto" onchange="previewImg()" name="foto" />
+                                <input type="file" class="form-control border mb-5 " id="foto" onchange="previewImg()" name="foto" />
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('foto'); ?>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <a href="<?= base_url('/ncr_form') ?>" class="btn btn-secondary btn-lg">Back</a>
-                                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                            </div>
+                            <!-- <div class="d-flex justify-content-between"> -->
+                            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                            <!-- </div> -->
                         </form>
                     </div>
                 </div>

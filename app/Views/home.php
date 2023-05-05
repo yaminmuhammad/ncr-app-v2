@@ -12,7 +12,7 @@
 <!-- ======================= Cards ================== -->
 <?php if (session()->get('is_admin')) : ?>
     <div class="cardBox">
-        <div class="mycard bg-primary">
+        <div class="mycard shadow-lg bg-primary">
             <div>
                 <div class="numbers"> <?= $total_rows ?></div>
                 <div class="cardName">Problems</div>
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="mycard bg-danger">
+        <div class="mycard shadow-lg bg-danger">
             <div>
                 <div class="numbers">80</div>
                 <div class="cardName">Status NG</div>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="mycard bg-success">
+        <div class="mycard shadow-lg bg-success">
             <div>
                 <div class="numbers">284</div>
                 <div class="cardName">Status OK</div>
@@ -43,29 +43,40 @@
                 <ion-icon name="checkmark-circle-outline"></ion-icon>
             </div>
         </div>
+
+        <div class="mycard shadow-lg bg-warning">
+            <div>
+                <div class="numbers">284</div>
+                <div class="cardName">Status Pending</div>
+            </div>
+
+            <div class="iconBx">
+                <ion-icon name="warning"></ion-icon>
+            </div>
+        </div>
     </div>
 
     <!-- ================ Order Details List ================= -->
     <div class="details">
-        <div class="recentOrders">
+        <div class="recentOrders shadow">
             <div class="cardHeader" style="margin-bottom: 30px;">
                 <h2>Recent Reports</h2>
 
                 <!-- <a href="#" class="btn">View All</a> -->
             </div>
-            <table id="process-table">
+            <table id="process-table" class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope=" col">#</th>
-                        <th scope="col">Foto</th>
-                        <th scope="col">Problem</th>
-                        <th scope="col">Area</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Satuan</th>
-                        <th scope="col">Departemen Tujuan</th>
-                        <th scope="col">Jenis Laporan</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Aksi</th>
+                        <th class="text-center" scope="col">#</th>
+                        <!-- <th class="text-center" scope="col">Foto</th> -->
+                        <th class="col-4 text-center" scope="col">Problem</th>
+                        <th class="text-center" scope="col">Area</th>
+                        <th class="text-center" scope="col">Quantity</th>
+                        <th class="text-center" scope="col">Satuan</th>
+                        <th class="text-center" scope="col">Departemen Tujuan</th>
+                        <th class="text-center" scope="col">Jenis Laporan</th>
+                        <th class="text-center" scope="col">Status</th>
+                        <th class="text-center" scope="col">Aksi</th>
                     </tr>
                 </thead>
 
@@ -74,25 +85,52 @@
                     <?php foreach ($ncr as $n) : ?>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>
-                            <td><img src="/img_uploaded/<?= $n['foto']; ?>" alt="" class="img-thumbnail fs-2" style="width: 200px;"></td>
-                            <td><?= $n['problem']; ?></td>
-                            <td><?= $n['area']; ?></td>
-                            <td><?= $n['qty']; ?></td>
-                            <td><?= $n['satuan']; ?></td>
-                            <td><?= $n['departemen_tujuan']; ?></td>
-                            <td><?= $n['jenis']; ?></td>
-                            <td>
-
+                            <!-- <td class="text-center"><img src="/img_uploaded/<?= $n['foto']; ?>" alt="" class="img-thumbnail fs-2" style="width: 200px;"></td> -->
+                            <td class="text-justify"><?= $n['problem']; ?></td>
+                            <td class="text-center"><?= $n['area']; ?></td>
+                            <td class="text-center"><?= $n['qty']; ?></td>
+                            <td class="text-center"><?= $n['satuan']; ?></td>
+                            <td class="text-center"><?= $n['departemen_tujuan']; ?></td>
+                            <td class="text-center"><?= $n['jenis']; ?></td>
+                            <td class="text-center">
+                                <?php if ($n['status'] == 'PENDING') { ?>
+                                    <span class="badge bg-primary" style="color: white;">Pending</span>
+                                <?php } else if ($n['status'] == "OK") { ?>
+                                    <span class="badge bg-success" style="color: white;">OK</span>
+                                <?php } else if ($n['status'] == "NG") { ?>
+                                    <span class="badge bg-danger" style="color: white;">NG</span>
+                                <?php }
+                                ?>
                             </td>
-                            <td>
-                                <!-- <a href="/detail_process/<?= $n['id']; ?>" class="btn btn-warning">
-                                Detail
-                            </a> -->
+                            <td class="text-center">
+                                <a href="/home/<?= $n['id']; ?>" class="btn btn-warning" style="color: white;">
+                                    Detail
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
+
+            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
         </div>
     </div>
 <?php endif; ?>
