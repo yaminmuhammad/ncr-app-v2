@@ -24,7 +24,7 @@
 
         <div class="mycard shadow-lg bg-danger">
             <div>
-                <div class="numbers">80</div>
+                <div class="numbers"> <?php echo $status_count['ng_count']; ?></div>
                 <div class="cardName">Status NG</div>
             </div>
 
@@ -35,7 +35,7 @@
 
         <div class="mycard shadow-lg bg-success">
             <div>
-                <div class="numbers">284</div>
+                <div class="numbers"><?php echo $status_count['ok_count']; ?></div>
                 <div class="cardName">Status OK</div>
             </div>
 
@@ -46,7 +46,7 @@
 
         <div class="mycard shadow-lg bg-warning">
             <div>
-                <div class="numbers">284</div>
+                <div class="numbers"><?php echo $status_count['pending_count']; ?></div>
                 <div class="cardName">Status Pending</div>
             </div>
 
