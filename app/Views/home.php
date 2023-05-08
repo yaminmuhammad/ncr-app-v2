@@ -94,7 +94,7 @@
                             <td class="text-center"><?= $n['jenis']; ?></td>
                             <td class="text-center">
                                 <?php if ($n['status'] == 'PENDING') { ?>
-                                    <span class="badge bg-primary" style="color: white;">Pending</span>
+                                    <span class="badge bg-primary" style="color: white;">PENDING</span>
                                 <?php } else if ($n['status'] == "OK") { ?>
                                     <span class="badge bg-success" style="color: white;">OK</span>
                                 <?php } else if ($n['status'] == "NG") { ?>

@@ -43,9 +43,10 @@ $routes->get('/ncr_form', 'Ncr::create_ncr', ['filter' => 'auth']);
 // $routes->get('/form_process', 'Process::create_process', ['filter' => 'auth']);
 // $routes->post('/process/save', 'Process::save', ['filter' => 'auth']);
 $routes->post('/ncr/save', 'Ncr::save', ['filter' => 'auth']);
-
+$routes->get('/home/edit/(:segment)', 'Ncr::edit/$1');
 $routes->get('/home', 'Ncr::index_ncr', ['filter' => 'auth']);
 $routes->get('/home/(:any)', 'Ncr::detail_ncr/$1', ['filter' => 'auth']);
+$routes->post('/home/update/(:any)', 'Ncr::update_ncr/$1', ['filter' => 'auth']);
 // $routes->get('/detail_process', 'Process::index_process', ['filter' => 'auth']);
 // $routes->get('/detail_process/export', 'Process::export', ['filter' => 'auth']);
 // $routes->get('/detail_process/(:any)', 'Process::exportid/$1', ['filter' => 'auth']);

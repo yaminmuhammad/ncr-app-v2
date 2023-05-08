@@ -127,4 +127,28 @@ class Ncr extends BaseController
         }
         return view('ncr/detail_ncr_view', $data);
     }
+
+    public function update_ncr($id)
+    {
+        $ncrLama = $this->ncrModel->getNcr($id);
+        if ($ncrLama['status'] == "PENDING") {
+            $data = [
+                'title' => 'Update Laporan NCR',
+                'id_ncr' =>  $this->ncrModel->getNcr($id)
+            ];
+            if ($this->request->getMethod() == 'post') {
+                $this->ncrModel->save([
+                    'id' => $id,
+                    'status' => $this->request->getVar('status')
+                ]);
+                session()->setFlashdata('pesan', 'Status Berhasil Diubah');
+                return redirect()->to('/home');
+            } else {
+                return view('ncr/detail_ncr_view', $data);
+            }
+        } else {
+            session()->setFlashdata('pesan', 'Status Tidak Bisa Diubah');
+            return redirect()->to('/home');
+        }
+    }
 }
