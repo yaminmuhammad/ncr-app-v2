@@ -148,7 +148,7 @@ class Ncr extends BaseController
                 return view('ncr/detail_ncr_view', $data);
             }
         } else {
-            session()->setFlashdata('pesan', 'Status Tidak Bisa Diubah');
+            session()->setFlashdata('pesan-error', 'Status Tidak Bisa Diubah Lebih Dari Sekali');
             return redirect()->to('/home');
         }
     }

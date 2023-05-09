@@ -9,6 +9,14 @@
         </button>
     </div>
 <?php endif; ?>
+<?php if (session()->getFlashdata('pesan-error')) : ?>
+    <div class="alert alert-danger alert-dismissible fade show w-75 mx-auto" role="alert">
+        <?= session()->getFlashdata('pesan-error'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
 <!-- ======================= Cards ================== -->
 <?php if (session()->get('is_admin')) : ?>
     <div class="cardBox">
@@ -64,7 +72,7 @@
 
                 <!-- <a href="#" class="btn">View All</a> -->
             </div>
-            <table id="process-table" class="table table-striped">
+            <table id="process-table" class="table table-striped table-responsive-xl">
                 <thead>
                     <tr>
                         <th class="text-center" scope="col">#</th>
@@ -103,9 +111,17 @@
                                 ?>
                             </td>
                             <td class="text-center">
-                                <a href="/home/<?= $n['id']; ?>" class="btn btn-warning" style="color: white;">
-                                    Detail
-                                </a>
+                                <div class="btn-group">
+                                    <a href="/home/<?= $n['id']; ?>" class="btn btn-warning" style="color: white;">
+                                        <ion-icon name="eye"></ion-icon>
+                                    </a>
+                                    <a href="/home/<?= $n['id']; ?>/edit" class="btn btn-primary" style="color: white;">
+                                        <ion-icon name="print"></ion-icon>
+                                    </a>
+                                    <a href="/home/<?= $n['id']; ?>/delete" class="btn btn-danger" style="color: white;">
+                                        <ion-icon name="mail"></ion-icon>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>

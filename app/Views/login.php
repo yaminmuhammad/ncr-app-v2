@@ -44,7 +44,7 @@
 
                             <div class="input-field" style="padding-bottom: 30px;">
                                 <i class='bx bx-lock-alt'></i>
-                                <input type="password" id="npk" name="npk" class="input <?= (validation_show_error('npk')) ? 'is-invalid' : ''; ?>" value="<?= old('npk') ?>" placeholder="Masukkan NPK" />
+                                <input type="password" id="npk" name="npk" class="input <?= (validation_show_error('npk')) ? 'is-invalid' : ''; ?>" value="<?= old('npk') ?>" placeholder="Masukkan Password (NPK)" />
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('npk'); ?>
                                 </div>
