@@ -46,6 +46,8 @@ $routes->post('/ncr/save', 'Ncr::save', ['filter' => 'auth']);
 $routes->get('/home/edit/(:segment)', 'Ncr::edit/$1');
 $routes->get('/home', 'Ncr::index_ncr', ['filter' => 'auth']);
 $routes->get('/home/(:any)', 'Ncr::detail_ncr/$1', ['filter' => 'auth']);
+$routes->get('/print/(:any)', 'Ncr::printToExcel/$1', ['filter' => 'auth']);
+$routes->get('/send/(:any)', 'Ncr::sendEmail/$1', ['filter' => 'auth']);
 $routes->post('/home/update/(:any)', 'Ncr::update_ncr/$1', ['filter' => 'auth']);
 // $routes->get('/detail_process', 'Process::index_process', ['filter' => 'auth']);
 // $routes->get('/detail_process/export', 'Process::export', ['filter' => 'auth']);

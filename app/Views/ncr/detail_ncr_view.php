@@ -21,7 +21,15 @@
                             <h5 class="card-title font-weight-bold">Jenis NCR : </h5>
                             <p class="card-text text-justify"><?= $id_ncr['jenis'] ?></p> -->
                         <form method="POST" action="/home/update/<?= $id_ncr['id']; ?>" enctype="multipart/form-data">
+                            <? csrf_field() ?>
                             <table class="table">
+                                <!-- <thead>
+                                    <tr>
+                                        <td scope="row" class="card-title font-weight-bold">PROBLEM</td>
+                                        <td scope="row" class="card-title font-weight-bold">AREA</td>
+                                        <td scope="row" class="card-title font-weight-bold">QUANTITY</td>
+                                    </tr>
+                                </thead> -->
                                 <tr>
                                     <td scope="row" class="card-title font-weight-bold">PROBLEM</td>
                                     <td class="card-text text-justify"><?= $id_ncr['problem'] ?></td>
@@ -53,7 +61,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary btn-lg"><ion-icon name="save"></ion-icon> Save</button>
                         </form>
                     </div>
                 </div>

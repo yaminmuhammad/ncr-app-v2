@@ -4,14 +4,21 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\NcrModel;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Ncr extends BaseController
 {
     protected $ncrModel;
+    protected $email;
     protected $helpers = ['form'];
     public function __construct()
     {
         $this->ncrModel = new NcrModel();
+        $this->email = \Config\Services::email();
     }
 
     public function create_ncr()
@@ -151,5 +158,143 @@ class Ncr extends BaseController
             session()->setFlashdata('pesan-error', 'Status Tidak Bisa Diubah Lebih Dari Sekali');
             return redirect()->to('/home');
         }
+    }
+
+    public function printToExcel($id)
+    {
+        $data = $this->ncrModel->find($id);
+
+        // Create a new Spreadsheet object
+        $spreadsheet = new Spreadsheet();
+
+        // Set the worksheet title
+        $worksheet = $spreadsheet->getActiveSheet();
+        $worksheet->setTitle('NCR Report');
+
+
+        // Set the column widths
+        $worksheet->getColumnDimension('A')->setWidth(5);
+        $worksheet->getColumnDimension('B')->setWidth(50);
+        $worksheet->getColumnDimension('C')->setWidth(25);
+        $worksheet->getColumnDimension('D')->setWidth(25);
+        $worksheet->getColumnDimension('E')->setWidth(25);
+        $worksheet->getColumnDimension('F')->setWidth(25);
+        $worksheet->getColumnDimension('G')->setWidth(25);
+        $worksheet->getColumnDimension('H')->setWidth(25);
+        $worksheet->getColumnDimension('I')->setWidth(25);
+
+        // Set the row heights
+        $worksheet->getRowDimension('1')->setRowHeight(30);
+        $worksheet->getRowDimension('2')->setRowHeight(100);
+
+        // Set the column headers
+        $worksheet->setCellValue('A1', 'No.')
+            ->setCellValue('B1', 'Problem')
+            ->setCellValue('C1', 'Area')
+            ->setCellValue('D1', 'Qty')
+            ->setCellValue('E1', 'Satuan')
+            ->setCellValue('F1', 'Departemen Tujuan')
+            ->setCellValue('G1', 'Jenis')
+            ->setCellValue('H1', 'Status')
+            ->setCellValue('I1', 'Foto');
+
+        // Style the Header Row 
+        $styleArrayHeader = [
+            'font' => [
+                'bold' => true,
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'color' => ['argb' => 'FFAOAOAO'],
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'],
+                ],
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+                'wrapText' => true,
+            ],
+        ];
+        $worksheet->getStyle('A1:I1')->applyFromArray($styleArrayHeader);
+
+        // Style data rows
+        $styleArrayData = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THICK,
+                    'color' => ['argb' => 'FF000000'],
+                ],
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+                'wrapText' => true,
+                'textRotation' => 0,
+            ],
+        ];
+
+        // Fill in the data rows
+        $row = 2;
+        $worksheet->getStyle('A2:H' . ($row - 1))->applyFromArray($styleArrayData);
+        $worksheet->setCellValue('A' . $row, $row - 1)
+            ->setCellValue('B' . $row, $data['problem'])
+            ->setCellValue('C' . $row, $data['area'])
+            ->setCellValue('D' . $row, $data['qty'])
+            ->setCellValue('E' . $row, $data['satuan'])
+            ->setCellValue('F' . $row, $data['departemen_tujuan'])
+            ->setCellValue('G' . $row, $data['jenis'])
+            ->setCellValue('H' . $row, $data['status']);
+
+        // Center align the cell contents
+        $cellRange = 'A' . $row . ':I' . $row;
+        $worksheet->getStyle($cellRange)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $worksheet->getStyle($cellRange)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+        $imagePath = 'img_uploaded/' . $data['foto'];
+
+        // Check if the image file exists
+        if (file_exists($imagePath)) {
+            // Add the image to the worksheet
+            $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+            $drawing->setPath($imagePath);
+            $drawing->setWidth(120);
+            $drawing->setHeight(120);
+            $drawing->setOffsetX(10)
+                ->setOffsetY(10)
+                ->setCoordinates('I' . $row);
+            $drawing->setWorksheet($worksheet);
+        }
+
+        // Set the header content type and attachment filename
+        $filename = 'ncr_report_' . date('Y-m-d') . '.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+
+        // Write the Spreadsheet object to a file
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
+    }
+
+    public function sendEmail()
+    {
+
+        $this->email->setFrom('yaminzaman5@gmail.com', 'YaminZaman');
+        $this->email->setTo('yaminzaman5@gmail.com');
+
+        $this->email->setSubject('Test Email');
+        $this->email->setMessage('<h1>Test Email <p>Ini tes Email</p></h1>');
+
+        if (!$this->email->send()) {
+            echo 'Email Tidak Terkirim';
+        } else {
+            echo 'Email Berhasil Terkirim';
+        }
+        $this->email->send();
     }
 }

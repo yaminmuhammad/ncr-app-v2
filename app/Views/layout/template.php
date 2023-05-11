@@ -100,6 +100,7 @@
 
     <!-- =========== Scripts =========  -->
     <script src="<?= base_url('/assets/js/main.js') ?>"></script>
+    <script src="<?= base_url('/assets/js/tableHTMLExport.js') ?>"></script>
 
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -108,6 +109,18 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script> -->
+    <script>
+        $(document).ready(function() {
+            $(".export-btn-excel").click(function() {
+
+                $("#table-csv").tableHTMLExport({
+                    type: 'csv',
+                    filename: "Data Warehouse Receh.csv",
+                });
+
+            });
+        });
+    </script>
     <script>
         function previewImg() {
             const foto = document.querySelector('#foto');
@@ -132,6 +145,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script srt="assets/js/tableHTMLExport.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
 </body>
 

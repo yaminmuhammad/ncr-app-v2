@@ -20,13 +20,13 @@
 <!-- ======================= Cards ================== -->
 <?php if (session()->get('is_admin')) : ?>
     <div class="cardBox">
-        <div class="mycard shadow-lg bg-primary">
+        <div class="mycard shadow-lg bg-warning">
             <div>
                 <div class="numbers"> <?= $total_rows ?></div>
                 <div class="cardName">Problems</div>
             </div>
             <div class="iconBx">
-                <ion-icon name="eye-outline"></ion-icon>
+                <ion-icon name="warning"></ion-icon>
             </div>
         </div>
 
@@ -52,14 +52,14 @@
             </div>
         </div>
 
-        <div class="mycard shadow-lg bg-warning">
+        <div class="mycard shadow-lg bg-primary">
             <div>
                 <div class="numbers"><?php echo $status_count['pending_count']; ?></div>
                 <div class="cardName">Status Pending</div>
             </div>
 
             <div class="iconBx">
-                <ion-icon name="warning"></ion-icon>
+                <ion-icon name="eye-outline"></ion-icon>
             </div>
         </div>
     </div>
@@ -115,10 +115,10 @@
                                     <a href="/home/<?= $n['id']; ?>" class="btn btn-warning" style="color: white;">
                                         <ion-icon name="eye"></ion-icon>
                                     </a>
-                                    <a href="/home/<?= $n['id']; ?>/edit" class="btn btn-primary" style="color: white;">
+                                    <a href="/print/<?= $n['id']; ?>" class="btn btn-primary" style="color: white;">
                                         <ion-icon name="print"></ion-icon>
                                     </a>
-                                    <a href="/home/<?= $n['id']; ?>/delete" class="btn btn-danger" style="color: white;">
+                                    <a href="/send/<?= $n['id']; ?>" class="btn btn-danger" style="color: white;">
                                         <ion-icon name="mail"></ion-icon>
                                     </a>
                                 </div>
