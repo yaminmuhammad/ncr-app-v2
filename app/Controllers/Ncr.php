@@ -281,14 +281,14 @@ class Ncr extends BaseController
         exit;
     }
 
-    public function sendEmail()
+    public function sendEmail($id)
     {
-
+        $data = $this->ncrModel->find($id);
         $this->email->setFrom('yaminzaman5@gmail.com', 'YaminZaman');
         $this->email->setTo('yaminzaman5@gmail.com');
 
         $this->email->setSubject('Test Email');
-        $this->email->setMessage('<h1>Test Email <p>Ini tes Email</p></h1>');
+        $this->email->setMessage('<h1>Test Email <p>Ini tes Email. Silahkan klik <a href="' .  site_url('home/' . $id) . '">link ini</a> untuk mengunjungi halaman utama aplikasi.</p></h1>');
 
         if (!$this->email->send()) {
             echo 'Email Tidak Terkirim';

@@ -6,10 +6,8 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="">
                 <div class="card rounded-3 border shadow">
-                    <!-- <img src="assets/images/gambar1.jpeg" class="w-90" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo"> -->
                     <div class="card-body p-4 p-md-5">
                         <h2 class="text-center mb-4">Form Report NCR </h2>
-                        <!-- membuat flash data dari router setelah di save -->
                         <?php if (session()->getFlashdata('pesan')) : ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <?= session()->getFlashdata('pesan'); ?>
