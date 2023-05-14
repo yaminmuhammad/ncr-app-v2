@@ -10,6 +10,7 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+
 class Ncr extends BaseController
 {
     protected $ncrModel;
@@ -173,30 +174,50 @@ class Ncr extends BaseController
 
 
         // Set the column widths
-        $worksheet->getColumnDimension('A')->setWidth(5);
+
         $worksheet->getColumnDimension('B')->setWidth(50);
-        $worksheet->getColumnDimension('C')->setWidth(25);
-        $worksheet->getColumnDimension('D')->setWidth(25);
+        $worksheet->getColumnDimension('C')->setWidth(50);
+        $worksheet->getColumnDimension('D')->setWidth(50);
         $worksheet->getColumnDimension('E')->setWidth(25);
         $worksheet->getColumnDimension('F')->setWidth(25);
         $worksheet->getColumnDimension('G')->setWidth(25);
         $worksheet->getColumnDimension('H')->setWidth(25);
         $worksheet->getColumnDimension('I')->setWidth(25);
-
-        // Set the row heights
-        $worksheet->getRowDimension('1')->setRowHeight(30);
-        $worksheet->getRowDimension('2')->setRowHeight(100);
+        $spreadsheet->getActiveSheet()
+            ->mergeCells("B2:B9");
+        $spreadsheet->getActiveSheet()
+            ->mergeCells("C3:C5");
+        $spreadsheet->getActiveSheet()
+            ->mergeCells("C6:C9");
+        $spreadsheet->getActiveSheet()
+            ->mergeCells("D3:D5");
+        $spreadsheet->getActiveSheet()
+            ->mergeCells("D6:D9");
+        $spreadsheet->getActiveSheet()
+            ->mergeCells("B10:B21");
+        $spreadsheet->getActiveSheet()
+            ->mergeCells("C10:C21");
+        $spreadsheet->getActiveSheet()
+            ->mergeCells("D10:D28");
+        $spreadsheet->getActiveSheet()
+            ->mergeCells("A28:C28");
 
         // Set the column headers
-        $worksheet->setCellValue('A1', 'No.')
-            ->setCellValue('B1', 'Problem')
-            ->setCellValue('C1', 'Area')
-            ->setCellValue('D1', 'Qty')
-            ->setCellValue('E1', 'Satuan')
-            ->setCellValue('F1', 'Departemen Tujuan')
-            ->setCellValue('G1', 'Jenis')
-            ->setCellValue('H1', 'Status')
-            ->setCellValue('I1', 'Foto');
+        $worksheet
+            ->setCellValue('C2', 'Aktual')
+            ->setCellValue('D2', 'Standar')
+            ->setCellValue('A23', '1')
+            ->setCellValue('B1', 'Di Isi Departemen Penemu/Pembuat')
+            ->setCellValue('B22', 'Di Isi Departemen Quality')
+            ->setCellValue('B23', 'Hal ')
+            ->setCellValue('A24', '2')
+            ->setCellValue('B24', 'Depart. yang dituju ')
+            ->setCellValue('A25', '3')
+            ->setCellValue('B25', 'Nama Part/Tipe ')
+            ->setCellValue('A26', '4')
+            ->setCellValue('B26', 'Problem yang terjadi di ')
+            ->setCellValue('A27', '5')
+            ->setCellValue('B27', 'Frekuensi problem ');
 
         // Style the Header Row 
         $styleArrayHeader = [
@@ -219,40 +240,106 @@ class Ncr extends BaseController
                 'wrapText' => true,
             ],
         ];
-        $worksheet->getStyle('A1:I1')->applyFromArray($styleArrayHeader);
-
-        // Style data rows
-        $styleArrayData = [
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => Border::BORDER_THICK,
-                    'color' => ['argb' => 'FF000000'],
-                ],
+        $styleA = [
+            'font' => [
+                'bold' => true,
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'color' => ['argb' => 'FFAOAOAO'],
             ],
             'alignment' => [
                 'horizontal' => Alignment::HORIZONTAL_CENTER,
                 'vertical' => Alignment::VERTICAL_CENTER,
                 'wrapText' => true,
+            ],
+        ];
+        $styleB1 = [
+            'font' => [
+                'bold' => true,
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'color' => ['argb' => 'FFAOAOAO'],
+            ],
+        ];
+        $styleArrayNoBorder = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_NONE,
+                ],
+            ],
+        ];
+        $styleJudul = [
+            'font' => [
+                'color' => [
+                    'rgb' => '000000'
+                ],
+                'bold' => true,
+                'size' => 11
+            ],
+            'fill' => [
+                'fillType' =>  fill::FILL_SOLID,
+                'startColor' => [
+                    'rgb' => 'ffc107'
+                ]
+            ],
+
+        ];
+        $worksheet->getStyle('C2:D2')->applyFromArray($styleArrayHeader);
+        $worksheet->getStyle('B1')->applyFromArray($styleJudul);
+        $worksheet->getStyle('B22')->applyFromArray($styleJudul);
+        $worksheet->getStyle('A23:A27')->applyFromArray($styleA);
+        $worksheet->getStyle('B23:B27')->applyFromArray($styleB1);
+        $worksheet->getStyle('C22:C27')->applyFromArray($styleB1);
+        $worksheet->getStyle('B10:B21')->applyFromArray($styleArrayNoBorder);
+        // Style data rows
+        $styleArrayData = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'],
+                ],
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_LEFT,
+                'vertical' => Alignment::VERTICAL_TOP,
+                'wrapText' => true,
                 'textRotation' => 0,
+            ],
+        ];
+        $styleB = [
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_LEFT,
+                'vertical' => Alignment::VERTICAL_TOP,
+                'wrapText' => true,
+                'textRotation' => 0,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'],
+                ],
             ],
         ];
 
         // Fill in the data rows
         $row = 2;
-        $worksheet->getStyle('A2:H' . ($row - 1))->applyFromArray($styleArrayData);
-        $worksheet->setCellValue('A' . $row, $row - 1)
-            ->setCellValue('B' . $row, $data['problem'])
-            ->setCellValue('C' . $row, $data['area'])
-            ->setCellValue('D' . $row, $data['qty'])
-            ->setCellValue('E' . $row, $data['satuan'])
-            ->setCellValue('F' . $row, $data['departemen_tujuan'])
-            ->setCellValue('G' . $row, $data['jenis'])
-            ->setCellValue('H' . $row, $data['status']);
+        $worksheet->getStyle('B2:B9')->applyFromArray($styleB);
+        $worksheet->getStyle('C3:C5')->applyFromArray($styleB);
+        $worksheet->getStyle('C6:C9')->applyFromArray($styleB);
+        $worksheet->getStyle('D3:D5')->applyFromArray($styleB);
+        $worksheet->getStyle('D6:D9')->applyFromArray($styleB);
+        $worksheet
+            ->setCellValue('B' . $row, 'Uraian Masalah : ' . $data['problem'])
+            ->setCellValue('C23', ' : ')
+            ->setCellValue('C24', ' : ' . $data['departemen_tujuan'])
+            ->setCellValue('C25', ' : ')
+            ->setCellValue('C26', ' : ' . $data['area'])
+            ->setCellValue('C27', ' : ');
 
-        // Center align the cell contents
-        $cellRange = 'A' . $row . ':I' . $row;
-        $worksheet->getStyle($cellRange)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-        $worksheet->getStyle($cellRange)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        $worksheet->getStyle('B10')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+        $worksheet->getStyle('B10')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
         $imagePath = 'img_uploaded/' . $data['foto'];
 
@@ -261,13 +348,16 @@ class Ncr extends BaseController
             // Add the image to the worksheet
             $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
             $drawing->setPath($imagePath);
-            $drawing->setWidth(120);
-            $drawing->setHeight(120);
-            $drawing->setOffsetX(10)
-                ->setOffsetY(10)
-                ->setCoordinates('I' . $row);
+            $drawing->setWidth(200);
+            $drawing->setHeight(200);
+            $drawing
+                ->setOffsetY(20)
+                ->setOffsetX(20)
+                ->setCoordinates('B10');
+
             $drawing->setWorksheet($worksheet);
         }
+
 
         // Set the header content type and attachment filename
         $filename = 'ncr_report_' . date('Y-m-d') . '.xlsx';
@@ -281,9 +371,130 @@ class Ncr extends BaseController
         exit;
     }
 
+    // public function printToExcel($id)
+    // {
+    //     $data = $this->ncrModel->find($id);
+
+    //     // Create a new Spreadsheet object
+    //     $spreadsheet = new Spreadsheet();
+
+    //     // Set the worksheet title
+    //     $worksheet = $spreadsheet->getActiveSheet();
+    //     $worksheet->setTitle('NCR Report');
+
+
+    //     // Set the column widths
+    //     $worksheet->getColumnDimension('A')->setWidth(5);
+    //     $worksheet->getColumnDimension('B')->setWidth(50);
+    //     $worksheet->getColumnDimension('C')->setWidth(25);
+    //     $worksheet->getColumnDimension('D')->setWidth(25);
+    //     $worksheet->getColumnDimension('E')->setWidth(25);
+    //     $worksheet->getColumnDimension('F')->setWidth(25);
+    //     $worksheet->getColumnDimension('G')->setWidth(25);
+    //     $worksheet->getColumnDimension('H')->setWidth(25);
+    //     $worksheet->getColumnDimension('I')->setWidth(25);
+
+    //     // Set the row heights
+    //     $worksheet->getRowDimension('1')->setRowHeight(30);
+    //     $worksheet->getRowDimension('2')->setRowHeight(100);
+
+    //     // Set the column headers
+    //     $worksheet->setCellValue('A1', 'No.')
+    //         ->setCellValue('B1', 'Problem')
+    //         ->setCellValue('C1', 'Area')
+    //         ->setCellValue('D1', 'Qty')
+    //         ->setCellValue('E1', 'Satuan')
+    //         ->setCellValue('F1', 'Departemen Tujuan')
+    //         ->setCellValue('G1', 'Jenis')
+    //         ->setCellValue('H1', 'Status')
+    //         ->setCellValue('I1', 'Foto');
+
+    //     // Style the Header Row 
+    //     $styleArrayHeader = [
+    //         'font' => [
+    //             'bold' => true,
+    //         ],
+    //         'fill' => [
+    //             'fillType' => Fill::FILL_SOLID,
+    //             'color' => ['argb' => 'FFAOAOAO'],
+    //         ],
+    //         'borders' => [
+    //             'allBorders' => [
+    //                 'borderStyle' => Border::BORDER_THIN,
+    //                 'color' => ['argb' => '000000'],
+    //             ],
+    //         ],
+    //         'alignment' => [
+    //             'horizontal' => Alignment::HORIZONTAL_CENTER,
+    //             'vertical' => Alignment::VERTICAL_CENTER,
+    //             'wrapText' => true,
+    //         ],
+    //     ];
+    //     $worksheet->getStyle('A1:I1')->applyFromArray($styleArrayHeader);
+
+    //     // Style data rows
+    //     $styleArrayData = [
+    //         'borders' => [
+    //             'allBorders' => [
+    //                 'borderStyle' => Border::BORDER_THICK,
+    //                 'color' => ['argb' => 'FF000000'],
+    //             ],
+    //         ],
+    //         'alignment' => [
+    //             'horizontal' => Alignment::HORIZONTAL_CENTER,
+    //             'vertical' => Alignment::VERTICAL_CENTER,
+    //             'wrapText' => true,
+    //             'textRotation' => 0,
+    //         ],
+    //     ];
+
+    //     // Fill in the data rows
+    //     $row = 2;
+    //     $worksheet->getStyle('A2:H' . ($row - 1))->applyFromArray($styleArrayData);
+    //     $worksheet->setCellValue('A' . $row, $row - 1)
+    //         ->setCellValue('B' . $row, $data['problem'])
+    //         ->setCellValue('C' . $row, $data['area'])
+    //         ->setCellValue('D' . $row, $data['qty'])
+    //         ->setCellValue('E' . $row, $data['satuan'])
+    //         ->setCellValue('F' . $row, $data['departemen_tujuan'])
+    //         ->setCellValue('G' . $row, $data['jenis'])
+    //         ->setCellValue('H' . $row, $data['status']);
+
+    //     // Center align the cell contents
+    //     $cellRange = 'A' . $row . ':I' . $row;
+    //     $worksheet->getStyle($cellRange)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+    //     $worksheet->getStyle($cellRange)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+
+    //     $imagePath = 'img_uploaded/' . $data['foto'];
+
+    //     // Check if the image file exists
+    //     if (file_exists($imagePath)) {
+    //         // Add the image to the worksheet
+    //         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+    //         $drawing->setPath($imagePath);
+    //         $drawing->setWidth(120);
+    //         $drawing->setHeight(120);
+    //         $drawing->setOffsetX(10)
+    //             ->setOffsetY(10)
+    //             ->setCoordinates('I' . $row);
+    //         $drawing->setWorksheet($worksheet);
+    //     }
+
+    //     // Set the header content type and attachment filename
+    //     $filename = 'ncr_report_' . date('Y-m-d') . '.xlsx';
+    //     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    //     header('Content-Disposition: attachment;filename="' . $filename . '"');
+    //     header('Cache-Control: max-age=0');
+
+    //     // Write the Spreadsheet object to a file
+    //     $writer = new Xlsx($spreadsheet);
+    //     $writer->save('php://output');
+    //     exit;
+    // }
+
     public function sendEmail($id)
     {
-        $data = $this->ncrModel->find($id);
+        // $data = $this->ncrModel->find($id);
         $this->email->setFrom('yaminzaman5@gmail.com', 'YaminZaman');
         $this->email->setTo('yaminzaman5@gmail.com');
 
@@ -291,9 +502,11 @@ class Ncr extends BaseController
         $this->email->setMessage('<h1>Test Email <p>Ini tes Email. Silahkan klik <a href="' .  site_url('home/' . $id) . '">link ini</a> untuk mengunjungi halaman utama aplikasi.</p></h1>');
 
         if (!$this->email->send()) {
-            echo 'Email Tidak Terkirim';
+            session()->setFlashdata('pesan-error', 'Email Gagal Dikirim');
+            return redirect()->to('/home');
         } else {
-            echo 'Email Berhasil Terkirim';
+            session()->setFlashdata('pesan', 'Email Berhasil Dikirim');
+            return redirect()->to('/home');
         }
         $this->email->send();
     }
