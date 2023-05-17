@@ -20,6 +20,22 @@
                                     <td class="card-text text-justify"><?= $id_ncr['area'] ?></td>
                                 </tr>
                                 <tr>
+                                    <td scope="row" class="card-title font-weight-bold">TEMPORARY ACTION</td>
+                                    <td class="card-text text-justify"><?= $id_ncr['temporary_action'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="card-title font-weight-bold">OTY</td>
+                                    <td class="card-text text-justify"><?= $id_ncr['oty'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="card-title font-weight-bold">AKTUAL</td>
+                                    <td class="card-text text-justify"><?= $id_ncr['aktual'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="card-title font-weight-bold">STANDAR</td>
+                                    <td class="card-text text-justify"><?= $id_ncr['standar'] ?></td>
+                                </tr>
+                                <tr>
                                     <td scope="row" class="card-title font-weight-bold">QUANTITY</td>
                                     <td class="card-text text-justify"><?= $id_ncr['qty'] ?> <?= $id_ncr['satuan'] ?></td>
                                 </tr>

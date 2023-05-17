@@ -33,6 +33,34 @@
                                     <?= validation_show_error('area'); ?>
                                 </div>
                             </div>
+                            <div class="form-group mb-4">
+                                <label for="temporary_action" class="form-label fs-5">Temporary Action</label>
+                                <input type="text" class="form-control border p-2 mb-2 <?= (validation_show_error('temporary_action')) ? 'is-invalid' : ''; ?>" id="temporary_action" placeholder="cth : Sortir" name="temporary_action" value="<?= old('temporary_action') ?>" />
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('temporary_action'); ?>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="area" class="form-label fs-5">OTY</label>
+                                <input type="text" class="form-control border p-2 mb-2 <?= (validation_show_error('oty')) ? 'is-invalid' : ''; ?>" id="oty" placeholder="cth : Reject 3" name="oty" value="<?= old('oty') ?>" />
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('oty'); ?>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="area" class="form-label fs-5">Aktual</label>
+                                <input type="text" class="form-control border p-2 mb-2 <?= (validation_show_error('aktual')) ? 'is-invalid' : ''; ?>" id="aktual" placeholder="cth : White mark pada bagian sisi pendek" name="aktual" value="<?= old('aktual') ?>" />
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('aktual'); ?>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="area" class="form-label fs-5">Standar</label>
+                                <input type="text" class="form-control border p-2 mb-2 <?= (validation_show_error('standar')) ? 'is-invalid' : ''; ?>" id="standar" placeholder="cth : Tidak ada white mark" name="standar" value="<?= old('standar') ?>" />
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('standar'); ?>
+                                </div>
+                            </div>
                             <div class="form-group mb-4 row justify-content-center">
                                 <div class="col-5">
                                     <label for="qty" class="form-label fs-5">Quantity</label>

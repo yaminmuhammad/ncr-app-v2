@@ -40,6 +40,30 @@ class Ncr extends BaseController
                     'required' => 'Kolom {field} harus diisi'
                 ]
             ],
+            'temporary_action' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi'
+                ]
+            ],
+            'oty' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi'
+                ]
+            ],
+            'standar' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi'
+                ]
+            ],
+            'aktual' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi'
+                ]
+            ],
             'area' => [
                 'rules' => 'required',
                 'errors' => [
@@ -99,6 +123,10 @@ class Ncr extends BaseController
         // insert data
         $this->ncrModel->save([
             'problem' => $this->request->getVar('problem'),
+            'temporary_action' => $this->request->getVar('temporary_action'),
+            'oty' => $this->request->getVar('oty'),
+            'standar' => $this->request->getVar('standar'),
+            'aktual' => $this->request->getVar('aktual'),
             'area' => $this->request->getVar('area'),
             'qty' => $this->request->getVar('qty'),
             'satuan' => $this->request->getVar('satuan'),
@@ -332,6 +360,10 @@ class Ncr extends BaseController
         $worksheet->getStyle('D6:D9')->applyFromArray($styleB);
         $worksheet
             ->setCellValue('B' . $row, 'Uraian Masalah : ' . $data['problem'])
+            ->setCellValue('C3',  $data['aktual'])
+            ->setCellValue('C6', 'OTY : ' .  $data['oty'])
+            ->setCellValue('D6', 'Temporary Action : ' .  $data['temporary_action'])
+            ->setCellValue('D3',  $data['standar'])
             ->setCellValue('C23', ' : ')
             ->setCellValue('C24', ' : ' . $data['departemen_tujuan'])
             ->setCellValue('C25', ' : ')
@@ -360,7 +392,7 @@ class Ncr extends BaseController
 
 
         // Set the header content type and attachment filename
-        $filename = 'ncr_report_' . date('Y-m-d') . '.xlsx';
+        $filename = 'ncr_report_' . date('Y-m-d') . $data['id'] . '.xlsx';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');
