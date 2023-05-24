@@ -114,7 +114,7 @@
                                     <a href="/home/<?= $n['id']; ?>" class="btn btn-warning" style="color: white;">
                                         <ion-icon name="eye"></ion-icon>
                                     </a>
-                                    <a href="/print/<?= $n['id']; ?>" class="btn btn-primary" style="color: white;">
+                                    <a href="/printX/<?= $n['id']; ?>" class="btn btn-primary" style="color: white;">
                                         <ion-icon name="print"></ion-icon>
                                     </a>
                                     <a href="/send/<?= $n['id']; ?>" class="btn btn-danger" style="color: white;">
