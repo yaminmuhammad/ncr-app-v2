@@ -62,12 +62,12 @@
                             <a href="/printX/<?= $id_ncr['id']; ?>" class="btn btn-success" style="color: white; float: right; margin-left: 10px;">
                                 <ion-icon name="print"></ion-icon> Excel
                             </a>
-                            <a href="/printW/<?= $id_ncr['id']; ?>" class="btn btn-primary" style="color: white; float: right; margin-left: 10px;">
+                            <!-- <a href="/printW/<?= $id_ncr['id']; ?>" class="btn btn-primary" style="color: white; float: right; margin-left: 10px;">
                                 <ion-icon name="print"></ion-icon> Word
                             </a>
                             <a href="" class="btn btn-danger" style="color: white; float: right; margin-left: 10px;">
                                 <ion-icon name="print"></ion-icon> PDF
-                            </a>
+                            </a> -->
 
                         </form>
                     </div>
