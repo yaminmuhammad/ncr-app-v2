@@ -191,25 +191,79 @@ class Ncr extends BaseController
         }
     }
 
+    // public function printToExcel($id)
+    // {
+    //     $data = $this->ncrModel->find($id);
+
+    //     $spreadsheet = IOFactory::load(ROOTPATH . 'public/templates/template.xlsx');
+
+    //     // Set the worksheet title
+    //     $sheet = $spreadsheet->getActiveSheet();
+
+
+    //     $sheet
+    //         ->setCellValue('AO2', 'Tanggal :' . date('d F Y'))
+    //         ->setCellValue('L43', 'Temporary / Correction Action :  ' . $data['temporary_action'])
+    //         ->setCellValue('L41',  $data['aktual'])
+    //         ->setCellValue('P41',  $data['standar'])
+    //         ->setCellValue('G40', ' :  ' . $data['problem'])
+    //         ->setCellValue('H12', ':         ' . $data['departemen_tujuan'])
+    //         ->setCellValue('G45', ':  ' . $data['qty'] . '  ' . $data['satuan']);
+
+    //     $sheet->mergeCells("E22:E26");
+    //     $imagePath = 'img_uploaded/' . $data['foto'];
+
+    //     // Check if the image file exists
+    //     if (file_exists($imagePath)) {
+    //         // Add the image to the worksheet
+    //         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+    //         $drawing->setPath($imagePath);
+    //         $drawing->setWidth(900);
+    //         $drawing->setHeight(400);
+    //         $drawing
+    //             // ->setOffsetY(30)
+    //             // ->setOffsetX(30)
+    //             ->setCoordinates('E22');
+
+    //         $drawing->setWorksheet($sheet);
+    //     }
+
+    //     // Set the header content type and attachment filename
+    //     $filename = 'ncr_report_' . date('Y-m-d') . $data['id'] . '.xlsx';
+    //     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    //     header('Content-Disposition: attachment;filename="' . $filename . '"');
+    //     header('Cache-Control: max-age=0');
+
+    //     // Write the Spreadsheet object to output
+    //     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+    //     $writer->save('php://output');
+    // }
+
     public function printToExcel($id)
     {
         $data = $this->ncrModel->find($id);
 
-        // Create a new Spreadsheet object
-        $spreadsheet = IOFactory::load(ROOTPATH . 'public/templates/template.xlsx');
+        $templatePath = ROOTPATH . 'public/templates/template.xlsx';
+
+        // Check if the template file exists
+        if (!file_exists($templatePath)) {
+            // Handle file not found error
+            return 'Template file not found';
+        }
+
+        $spreadsheet = IOFactory::load($templatePath);
 
         // Set the worksheet title
         $sheet = $spreadsheet->getActiveSheet();
 
-
         $sheet
             ->setCellValue('AO2', 'Tanggal :' . date('d F Y'))
-            ->setCellValue('L43', 'Temporary / Correction Action :  ' . $data['temporary_action'])
-            ->setCellValue('L41',  $data['aktual'])
-            ->setCellValue('P41',  $data['standar'])
-            ->setCellValue('G40', ' :' . $data['problem'])
-            ->setCellValue('H12', ':         ' . $data['departemen_tujuan'])
-            ->setCellValue('G45', ' :  ' . $data['qty'] . '  ' . $data['satuan']);
+            ->setCellValue('L43', 'Temporary / Correction Action :  ' . htmlspecialchars($data['temporary_action']))
+            ->setCellValue('L41', $data['aktual'])
+            ->setCellValue('P41', $data['standar'])
+            ->setCellValue('G40', ' :  ' . htmlspecialchars($data['problem']))
+            ->setCellValue('H12', ':         ' . htmlspecialchars($data['departemen_tujuan']))
+            ->setCellValue('G45', ':  ' . $data['qty'] . '  ' . $data['satuan']);
 
         $sheet->mergeCells("E22:E26");
         $imagePath = 'img_uploaded/' . $data['foto'];
@@ -221,10 +275,7 @@ class Ncr extends BaseController
             $drawing->setPath($imagePath);
             $drawing->setWidth(900);
             $drawing->setHeight(400);
-            $drawing
-                // ->setOffsetY(30)
-                // ->setOffsetX(30)
-                ->setCoordinates('E22');
+            $drawing->setCoordinates('E22');
 
             $drawing->setWorksheet($sheet);
         }
@@ -238,7 +289,9 @@ class Ncr extends BaseController
         // Write the Spreadsheet object to output
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('php://output');
+        exit;
     }
+
 
 
     public function sendEmail($id)
