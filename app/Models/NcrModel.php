@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class NcrModel extends Model
 {
     protected $table            = 'ncr';
-    protected $allowedFields    = ['problem', 'temporary_action', 'oty', 'standar', 'aktual', 'area', 'qty', 'satuan', 'departemen_tujuan', 'jenis', 'foto', 'created_at', 'updated_at', 'deleted_at', 'status', 'email'];
+    protected $allowedFields    = ['nama', 'hal', 'attn', 'frekuensi_masalah', 'problem', 'temporary_action', 'oty', 'standar', 'aktual', 'area', 'qty', 'satuan', 'departemen_tujuan', 'jenis', 'foto', 'created_at', 'updated_at', 'deleted_at', 'status', 'email'];
     protected $useTimestamps = true;
 
     public function countRows()

@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 <section>
-    <div class="container py-5 h-100">
+    <div class="container-xl py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="">
                 <div class="card rounded-3 border shadow">
@@ -20,6 +20,43 @@
                         <form action="/ncr/save" method="post" enctype="multipart/form-data" class="px-md-2">
                             <?= csrf_field() ?>
                             <div class="form-group mb-4">
+                                <label for="nama" class="form-label fs-5">Name Part/Tipe</label>
+                                <input type="text" class="form-control border p-2 mb-2 <?= (validation_show_error('nama')) ? 'is-invalid' : ''; ?>" id="nama" placeholder="Masukkan Nama Part/Tipe" autofocus value="<?= old('nama') ?>" name="nama"></input>
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('nama'); ?>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="hal" class="form-label fs-5">Hal</label>
+                                <select class="form-control select2  border p-2 mb-2 hal <?= (validation_show_error('hal')) ? 'is-invalid' : ''; ?>" data-placeholder="-- Pilih Hal --" data-allow-clear="true" name="hal" id="hal">
+                                    <option disabled selected>-- Pilih Hal --</option>
+                                    <option value="MASALAH">MASALAH</option>
+                                    <option value="POTENSI MASALAH">POTENSI MASALAH</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('hal'); ?>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="attn" class="form-label fs-5">Attn</label>
+                                <input type="text" class="form-control border p-2 mb-2 <?= (validation_show_error('attn')) ? 'is-invalid' : ''; ?>" id="attn" placeholder="Masukkan Attn" autofocus value="<?= old('attn') ?>" name="attn"></input>
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('attn'); ?>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="frekuensi_masalah" class="form-label fs-5">Frekuensi Masalah</label>
+                                <select class="form-control select2  border p-2 mb-2 frekuensi_masalah <?= (validation_show_error('frekuensi_masalah')) ? 'is-invalid' : ''; ?>" data-placeholder="-- Pilih Frekuensi Masalah --" data-allow-clear="true" name="frekuensi_masalah" id="frekuensi_masalah">
+                                    <option disabled selected>-- Pilih Frekuensi Masalah --</option>
+                                    <option value="Pertama kali">Pertama kali</option>
+                                    <option value="Berulang">Berulang</option>
+                                    <option value="Sering">Sering</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    <?= validation_show_error('frekuensi_masalah'); ?>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
                                 <label for="problem" class="form-label fs-5">Problem</label>
                                 <textarea class="form-control border p-2 mb-2 <?= (validation_show_error('problem')) ? 'is-invalid' : ''; ?>" id="problem" placeholder="Masukkan Detail Problem" autofocus value="<?= old('problem') ?>" name="problem" style="height: 100px; resize: none;"></textarea>
                                 <div class="invalid-feedback">
@@ -27,8 +64,15 @@
                                 </div>
                             </div>
                             <div class="form-group mb-4">
-                                <label for="area" class="form-label fs-5">Area</label>
-                                <input type="text" class="form-control border p-2 mb-2 <?= (validation_show_error('area')) ? 'is-invalid' : ''; ?>" id="area" placeholder="cth : GEDUNG A" name="area" value="<?= old('area') ?>" />
+                                <label for="area" class="form-label fs-5">Problem Terjadi</label>
+                                <select class="form-control select2  border p-2 mb-2 area <?= (validation_show_error('area')) ? 'is-invalid' : ''; ?>" data-placeholder="-- Pilih Area --" data-allow-clear="true" name="area" id="area">
+                                    <option disabled selected>-- Pilih Area --</option>
+                                    <option value="Incoming">Incoming</option>
+                                    <option value="Produksi 1">Produksi 1</option>
+                                    <option value="Produksi 2">Produksi 2</option>
+                                    <option value="WH-C/WH-FG">WH-C/WH-FG</option>
+                                    <option value="Customer">Customer</option>
+                                </select>
                                 <div class="invalid-feedback">
                                     <?= validation_show_error('area'); ?>
                                 </div>

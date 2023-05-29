@@ -12,6 +12,22 @@
                             <? csrf_field() ?>
                             <table class="table">
                                 <tr>
+                                    <td scope="row" class="card-title font-weight-bold">NAMA</td>
+                                    <td class="card-text text-justify"><?= $id_ncr['nama'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="card-title font-weight-bold">HAL</td>
+                                    <td class="card-text text-justify"><?= $id_ncr['hal'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="card-title font-weight-bold">Attn</td>
+                                    <td class="card-text text-justify"><?= $id_ncr['attn'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="card-title font-weight-bold">FREKUENSI MASALAH</td>
+                                    <td class="card-text text-justify"><?= $id_ncr['frekuensi_masalah'] ?></td>
+                                </tr>
+                                <tr>
                                     <td scope="row" class="card-title font-weight-bold">PROBLEM</td>
                                     <td class="card-text text-justify"><?= $id_ncr['problem'] ?></td>
                                 </tr>
@@ -61,6 +77,9 @@
                             <button type="submit" class="btn btn-info">Save</button>
                             <a href="/printX/<?= $id_ncr['id']; ?>" class="btn btn-success" style="color: white; float: right; margin-left: 10px;">
                                 <ion-icon name="print"></ion-icon> Excel
+                            </a>
+                            <a href="/send/<?= $id_ncr['id']; ?>" class="btn btn-danger" style="color: white; float: right; margin-left: 10px;">
+                                <ion-icon name="mail"></ion-icon> Email
                             </a>
                         </form>
                     </div>

@@ -23,7 +23,7 @@
         <div class="mycard shadow-lg bg-warning">
             <div>
                 <div class="numbers"> <?= $total_rows ?></div>
-                <div class="cardName">Problems</div>
+                <div class="cardName">Laporan</div>
             </div>
             <div class="iconBx">
                 <ion-icon name="warning"></ion-icon>

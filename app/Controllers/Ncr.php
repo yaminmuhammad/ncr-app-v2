@@ -5,13 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\NcrModel;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
-use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpWord\PhpWord;
-use PhpOffice\PhpWord\Writer\Word2007;
 
 class Ncr extends BaseController
 {
@@ -36,6 +30,30 @@ class Ncr extends BaseController
     public function save()
     {
         if (!$this->validate([
+            'nama' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi'
+                ]
+            ],
+            'hal' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi'
+                ]
+            ],
+            'attn' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi'
+                ]
+            ],
+            'frekuensi_masalah' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kolom {field} harus diisi'
+                ]
+            ],
             'problem' => [
                 'rules' => 'required',
                 'errors' => [
@@ -124,6 +142,10 @@ class Ncr extends BaseController
 
         // insert data
         $this->ncrModel->save([
+            'nama' => $this->request->getVar('nama'),
+            'hal' => $this->request->getVar('hal'),
+            'attn' => $this->request->getVar('attn'),
+            'frekuensi_masalah' => $this->request->getVar('frekuensi_masalah'),
             'problem' => $this->request->getVar('problem'),
             'temporary_action' => $this->request->getVar('temporary_action'),
             'oty' => $this->request->getVar('oty'),
@@ -137,7 +159,7 @@ class Ncr extends BaseController
             'foto' => $namaFoto,
             'status' => "PENDING"
         ]);
-        session()->setFlashdata('pesan', 'Data Berhasil Ditambahkan');
+        session()->setFlashdata('pesan', 'Data Berhasil Dikirim');
         return redirect()->to('/ncr_form');
     }
 
@@ -191,54 +213,6 @@ class Ncr extends BaseController
         }
     }
 
-    // public function printToExcel($id)
-    // {
-    //     $data = $this->ncrModel->find($id);
-
-    //     $spreadsheet = IOFactory::load(ROOTPATH . 'public/templates/template.xlsx');
-
-    //     // Set the worksheet title
-    //     $sheet = $spreadsheet->getActiveSheet();
-
-
-    //     $sheet
-    //         ->setCellValue('AO2', 'Tanggal :' . date('d F Y'))
-    //         ->setCellValue('L43', 'Temporary / Correction Action :  ' . $data['temporary_action'])
-    //         ->setCellValue('L41',  $data['aktual'])
-    //         ->setCellValue('P41',  $data['standar'])
-    //         ->setCellValue('G40', ' :  ' . $data['problem'])
-    //         ->setCellValue('H12', ':         ' . $data['departemen_tujuan'])
-    //         ->setCellValue('G45', ':  ' . $data['qty'] . '  ' . $data['satuan']);
-
-    //     $sheet->mergeCells("E22:E26");
-    //     $imagePath = 'img_uploaded/' . $data['foto'];
-
-    //     // Check if the image file exists
-    //     if (file_exists($imagePath)) {
-    //         // Add the image to the worksheet
-    //         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-    //         $drawing->setPath($imagePath);
-    //         $drawing->setWidth(900);
-    //         $drawing->setHeight(400);
-    //         $drawing
-    //             // ->setOffsetY(30)
-    //             // ->setOffsetX(30)
-    //             ->setCoordinates('E22');
-
-    //         $drawing->setWorksheet($sheet);
-    //     }
-
-    //     // Set the header content type and attachment filename
-    //     $filename = 'ncr_report_' . date('Y-m-d') . $data['id'] . '.xlsx';
-    //     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    //     header('Content-Disposition: attachment;filename="' . $filename . '"');
-    //     header('Cache-Control: max-age=0');
-
-    //     // Write the Spreadsheet object to output
-    //     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-    //     $writer->save('php://output');
-    // }
-
     public function printToExcel($id)
     {
         $data = $this->ncrModel->find($id);
@@ -259,11 +233,22 @@ class Ncr extends BaseController
         $sheet
             ->setCellValue('AO2', 'Tanggal :' . date('d F Y'))
             ->setCellValue('L43', 'Temporary / Correction Action :  ' . htmlspecialchars($data['temporary_action']))
-            ->setCellValue('L41', $data['aktual'])
-            ->setCellValue('P41', $data['standar'])
+            ->setCellValue('L41', htmlspecialchars($data['aktual']))
+            ->setCellValue('P41', htmlspecialchars($data['standar']))
             ->setCellValue('G40', ' :  ' . htmlspecialchars($data['problem']))
-            ->setCellValue('H12', ':         ' . htmlspecialchars($data['departemen_tujuan']))
+            ->setCellValue('H11', ':    ' . htmlspecialchars($data['hal']))
+            ->setCellValue('H12', ':    ' . htmlspecialchars($data['departemen_tujuan']))
+            ->setCellValue('H13', ':    ' . htmlspecialchars($data['attn']))
+            ->setCellValue('H14', ':    ' . htmlspecialchars($data['nama']))
+            ->setCellValue('H15', ':    ' . htmlspecialchars($data['area']))
+            ->setCellValue('H18', ':    ' . htmlspecialchars($data['frekuensi_masalah']))
             ->setCellValue('G45', ':  ' . $data['qty'] . '  ' . $data['satuan']);
+
+        $styleB = [
+            'font' => [
+                'size' => 18
+            ],
+        ];
 
         $sheet->mergeCells("E22:E26");
         $imagePath = 'img_uploaded/' . $data['foto'];
@@ -280,6 +265,8 @@ class Ncr extends BaseController
             $drawing->setWorksheet($sheet);
         }
 
+        $sheet->getStyle('G40')->applyFromArray($styleB);
+        $sheet->getStyle('G45')->applyFromArray($styleB);
         // Set the header content type and attachment filename
         $filename = 'ncr_report_' . date('Y-m-d') . $data['id'] . '.xlsx';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
